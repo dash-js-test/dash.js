@@ -153,7 +153,6 @@ workflows:
     version: 2
     commit-workflow:
         jobs:
-            - build-and-unit-test # run unit tests on feature branch
             - functional-tests-custom
 
     scheduled-workflow:
