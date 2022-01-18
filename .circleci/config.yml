@@ -142,9 +142,9 @@ jobs:
             - build_unit_test_steps
             - functional_test_setup
             - run:
-                name: Run functional tests 2160p with PlayReady and Widevine DRM, multiple keys
+                name: Run functional tests VOD
                 command:
-                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=chrome --streams="2160p with PlayReady and Widevine DRM, multiple keyss"
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=chrome --streams="VOD"
 
             - store_test_results:
                 path: test/functional/reports
