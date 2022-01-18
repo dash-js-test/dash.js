@@ -133,21 +133,28 @@ jobs:
             - store_test_results:
                 path: test/functional/reports
 
+    functional-tests-custom:
+        executor: dashjs-executor
+        steps:
+            - functional_precondition
+            - checkout
+            - dependencies_setup
+            - build_unit_test_steps
+            - functional_test_setup
+            - run:
+                name: Run functional tests 2160p with PlayReady and Widevine DRM, multiple keys
+                command:
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=chrome --protocol=https --streams=2160p with PlayReady and Widevine DRM, multiple keys
+
+            - store_test_results:
+                path: test/functional/reports
+
 workflows:
     version: 2
     commit-workflow:
         jobs:
             - build-and-unit-test # run unit tests on feature branch
-            - merge-build-and-unit-test:  # run unit tests on virtually merged feature branch
-                filters:
-                    branches:
-                        ignore:
-                            - development # skiping redundant job if already on development
-            - functional-tests-smoke:
-                filters:
-                    branches:
-                        ignore: # as creds are available only for non-forked branches
-                            - /pull\/[0-9]+/
+            - functional-tests-custom:
 
     scheduled-workflow:
         triggers:
