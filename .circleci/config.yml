@@ -144,7 +144,7 @@ jobs:
             - run:
                 name: Run functional tests 2160p with PlayReady and Widevine DRM, multiple keys
                 command:
-                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=chrome --protocol=https --streams=2160p with PlayReady and Widevine DRM, multiple keys
+                    node test/functional/runTests.js --selenium=remote --reporters=junit --app=remote --browsers=chrome --protocol=https --streams="2160p with PlayReady and Widevine DRM, multiple keys"
 
             - store_test_results:
                 path: test/functional/reports
@@ -154,7 +154,7 @@ workflows:
     commit-workflow:
         jobs:
             - build-and-unit-test # run unit tests on feature branch
-            - functional-tests-custom:
+            - functional-tests-custom
 
     scheduled-workflow:
         triggers:
